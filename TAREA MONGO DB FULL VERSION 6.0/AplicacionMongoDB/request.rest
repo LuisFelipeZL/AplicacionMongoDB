@@ -1,0 +1,56 @@
+          GET TODAS LAS PROPIEDADES
+URL GET: http://localhost:3000/api/inmuebles
+
+
+
+           GET UNA PROPIEDAD CON ID
+URL GET: http://localhost:3000/api/inmuebles/63586fd638f4aa9596e2ffc
+
+
+
+
+              CREAR UNA PROPIEDAD
+URL POST: http://localhost:3000/api/inmuebles
+Content-Type: application/json
+
+{
+    "floor": 15,
+    "letter": "A",
+    "size": 400,
+    "num_rooms": 699,
+    "rented": true,
+    "owner": "Luis",
+    "contact_email": "luis5@gmail.com"
+}
+
+
+
+
+
+                ACTUALIZAR UNA PROPIEDAD
+URL PUT: http://localhost:3000/api/inmuebles/63655aa06c0793215f18b8fc
+Content-Type: application/json
+
+{
+    "rented": false
+}
+
+
+
+                        ELIMINAR UNA PROPIEDAD POR ID
+URL DELETE: http://localhost:3000/api/inmuebles/63655aa16c0793215f18b9
+
+
+
+
+                         ELIMINAR TODAS LAS PROPIEDADES
+URL DELETE: http://localhost:3000/api/inmuebles/all/floor=9
+
+
+
+
+                     OBTENER UNA PROPIEDAD DE UN DUEÑO
+URL GET: http://localhost:3000/api/inmuebles/owner/luis
+
+
+

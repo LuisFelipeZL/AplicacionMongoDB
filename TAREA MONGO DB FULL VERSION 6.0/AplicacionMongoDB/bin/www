@@ -1,0 +1,85 @@
+
+
+// Importa la aplicación Express desde el archivo '../app'.
+let app = require('../app');
+// Importa la biblioteca 'debug' y crea un objeto de depuración llamado 'inmueblesapp:server'.
+let debug = require('debug')('inmueblesapp:server');
+
+// Importa el módulo HTTP de Node.js.
+let http = require('http');
+
+// Carga las variables de entorno desde un archivo .env utilizando 'dotenv'.
+require('dotenv').config();
+// Establece la conexión con la base de datos a través del archivo de configuración '../config/db'.
+require('../config/db');
+
+// Normaliza el puerto en el que se ejecutará la aplicación a partir de las variables de entorno o el puerto 3000 de manera predeterminada.
+let port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+
+
+// Crea un servidor HTTP utilizando la aplicación Express.
+let server = http.createServer(app);
+
+// Escucha en el puerto especificado.
+server.listen(port);
+// Maneja errores del servidor.
+server.on('error', onError);
+// Notifica cuando el servidor está escuchando.
+server.on('listening', onListening);
+
+
+// Función para normalizar el puerto.
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+   // Devuelve el valor tal como está si no es un número.  
+    return val;
+  }
+
+  if (port >= 0) {
+  // Devuelve el número de puerto si es válido. 
+    return port;
+  }
+// Devuelve falso si el puerto no es válido.
+  return false;
+}
+
+
+// Función para manejar errores del servidor.
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    // Lanza una excepción si el error no está relacionado con 'listen'.
+    throw error;
+  }
+
+  let bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      // Lanza una excepción si se produce un error no reconocido.
+      throw error;
+  }
+}
+
+
+// Función que se ejecuta cuando el servidor está escuchando.
+function onListening(    ) {
+  let addr = server.address(    );
+  let bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

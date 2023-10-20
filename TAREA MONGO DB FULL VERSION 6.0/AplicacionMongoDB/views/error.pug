@@ -1,0 +1,10 @@
+// Extiende un archivo de diseño (layout) que se utiliza para mantener la estructura común de la página.
+extends layout
+// Define un bloque llamado 'content' que se llenará con contenido específico en plantillas que extienden esta plantilla.
+block content
+ // Crea un encabezado de nivel 1 (h1) y muestra el contenido de la variable 'message'.
+h1= message
+// Crea un encabezado de nivel 2 (h2) y muestra el valor de 'error.status'.
+h2= error.status
+// Crea un elemento 'pre' para mostrar el rastro de la pila de errores contenido en 'error.stack'.
+pre #{error.stack}
